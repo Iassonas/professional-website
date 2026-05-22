@@ -1,0 +1,6 @@
+# Shell scripts must use LF on the Azure Linux build agent
+*.sh         text eol=lf
+.deployment  text eol=lf
+
+# Default: let git auto-detect text/binary
+*            text=auto
