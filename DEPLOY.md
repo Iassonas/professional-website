@@ -99,11 +99,11 @@ Visit `https://<app>.azurewebsites.net`:
 - `/api/contact`, `/api/chat` → the FastAPI endpoints.
 - Logs: `az webapp log tail -n $app -g $rg`
 
-## Custom domain (e.g. iassonas.com)
+## Custom domain (e.g. iassonas.eu)
 
 ```powershell
-az webapp config hostname add -n $app -g $rg --hostname iassonas.com
-az webapp config ssl create  -n $app -g $rg --hostname iassonas.com
+az webapp config hostname add -n $app -g $rg --hostname iassonas.eu
+az webapp config ssl create  -n $app -g $rg --hostname iassonas.eu
 az webapp config ssl bind    -n $app -g $rg --certificate-thumbprint <thumb> --ssl-type SNI
 ```
 

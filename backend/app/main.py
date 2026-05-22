@@ -8,7 +8,7 @@ from app.routers import contact, chat
 
 app = FastAPI(
     title="Iassonas Georgakopoulos · API",
-    description="Backend for iassonas.com. Contact form and AI chat assistant.",
+    description="Backend for iassonas.eu. Contact form and AI chat assistant.",
     docs_url="/api/docs",
     redoc_url=None,
     openapi_url="/api/openapi.json",
