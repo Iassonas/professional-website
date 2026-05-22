@@ -77,8 +77,8 @@ function ContactForm() {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary" disabled={loading}>
-        {loading ? 'Sending...' : 'Send Message'}
+      <button type="submit" disabled={loading}>
+        {loading ? 'Sending…' : 'Send message →'}
       </button>
 
       {status && (

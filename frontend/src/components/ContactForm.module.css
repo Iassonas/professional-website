@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  max-width: 500px;
 }
 
 .field {
@@ -12,40 +11,78 @@
 }
 
 .field label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
 }
 
 .field input,
 .field textarea {
-  background: var(--color-surface);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  color: var(--color-text);
-  font-family: var(--font-family);
-  font-size: 0.95rem;
-  transition: border-color 0.2s;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
   resize: vertical;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--color-ink-faint);
 }
 
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: var(--color-ink);
+  background: var(--color-surface-2);
+}
+
+.form button[type="submit"] {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  border: 1px solid var(--color-ink);
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s var(--ease), transform 0.15s var(--ease);
+}
+
+.form button[type="submit"]:hover:not(:disabled) {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.form button[type="submit"]:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .status {
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: 0.5rem;
+  font-size: 0.92rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid;
 }
 
 .success {
-  color: var(--color-accent);
+  color: var(--color-success);
+  background: rgba(46, 111, 74, 0.08);
+  border-color: rgba(46, 111, 74, 0.3);
 }
 
 .error {
   color: var(--color-danger);
+  background: rgba(177, 50, 42, 0.08);
+  border-color: rgba(177, 50, 42, 0.3);
 }

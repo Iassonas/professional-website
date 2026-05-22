@@ -1,64 +1,106 @@
+.section {
+  padding: 8rem 0 5rem;
+}
+
+.eyebrow {
+  margin-bottom: 1.5rem;
+}
+
 .heading {
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.5rem;
+  padding-top: 0.1em;
+}
+
+.em {
+  font-style: italic;
+  color: var(--color-accent);
+  font-weight: 400;
+}
+
+.lede {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+  max-width: 60ch;
+  margin-bottom: 4rem;
 }
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 4rem;
   align-items: start;
 }
 
-.description {
-  color: var(--color-text-muted);
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 2rem;
-}
-
-.bookingTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-
-.calendarPlaceholder {
+.formSection {
   background: var(--color-surface);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius);
-  min-height: 350px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+}
+
+.info {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 100px;
 }
 
-.placeholder {
-  text-align: center;
-  color: var(--color-text-muted);
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.placeholder span {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  display: block;
+.infoBlock p {
+  font-size: 0.96rem;
+  color: var(--color-ink-soft);
 }
 
-.placeholder p {
-  font-size: 1rem;
-  font-weight: 600;
+.infoBlock a {
+  font-size: 0.96rem;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1px;
+  width: fit-content;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
 }
 
-.placeholderHint {
-  font-weight: 400 !important;
-  font-size: 0.85rem !important;
-  margin-top: 0.25rem;
-  opacity: 0.7;
+.infoBlock a:hover {
+  border-color: var(--color-ink);
+  color: var(--color-accent);
 }
 
-@media (max-width: 768px) {
+.infoHead {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  margin-bottom: 0.15rem;
+}
+
+.muted {
+  color: var(--color-ink-muted) !important;
+  font-size: 0.88rem !important;
+}
+
+@media (max-width: 820px) {
   .layout {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
+
+  .info {
+    position: static;
+    order: -1;
+  }
+
+  .formSection { padding: 1.75rem; }
 }
