@@ -16,6 +16,7 @@ frontend/dist/
 .idea/
 *.swp
 *.swo
+.claude/
 
 # OS
 .DS_Store
@@ -23,3 +24,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Personal files
+docs/
+frontend/public/profile-original.jpg
