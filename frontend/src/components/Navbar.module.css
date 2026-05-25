@@ -116,28 +116,41 @@
   display: none;
   flex-direction: column;
   gap: 5px;
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
   background: transparent;
-  border: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
   padding: 0;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.burger:hover,
+.burger:focus-visible {
+  border-color: var(--color-ink);
 }
 
 .burger span {
   width: 22px;
-  height: 1.5px;
+  height: 2px;
   background: var(--color-ink);
+  border-radius: 1px;
   transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
 }
 
 .burgerOpen span:first-child {
-  transform: translateY(3.5px) rotate(45deg);
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burgerOpen span:nth-child(2) {
+  opacity: 0;
 }
 
 .burgerOpen span:last-child {
-  transform: translateY(-3.5px) rotate(-45deg);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Medium widths: shorten the name so logo + links fit in one row */
@@ -171,15 +184,17 @@
   .links {
     position: fixed;
     inset: 72px 0 auto 0;
-    background: var(--color-bg);
+    background: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 0.5rem 1.75rem 1.5rem;
-    transform: translateY(-110%);
+    padding: 0.25rem 1.5rem 1.5rem;
+    transform: translateY(-120%);
     transition: transform 0.3s var(--ease);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
   }
 
   .links.open {
@@ -190,19 +205,38 @@
     border-top: 1px solid var(--color-border-soft);
   }
 
+  .links li:first-child {
+    border-top: 0;
+  }
+
   .links a {
     display: block;
     padding: 1rem 0;
     font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .links a.active {
+    color: var(--color-accent);
   }
 
   .links a.active::after {
     display: none;
   }
 
+  /* Override the desktop pill styling for the Contact link in mobile menu */
   .cta {
-    margin-top: 0.75rem;
-    text-align: center;
+    padding: 1rem 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    text-align: left !important;
+    background: transparent !important;
+    color: var(--color-ink) !important;
+  }
+
+  .cta:hover {
+    background: transparent !important;
+    color: var(--color-accent) !important;
   }
 }
 

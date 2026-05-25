@@ -1,6 +1,8 @@
 from openai import OpenAI
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException, Request
+from pydantic import BaseModel, Field, field_validator
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 from app.config import (
     OPENAI_API_KEY,
@@ -12,6 +14,11 @@ from app.config import (
 )
 
 router = APIRouter()
+limiter = Limiter(key_func=get_remote_address)
+
+MAX_MESSAGE_CHARS = 2000
+MAX_MESSAGES_PER_REQUEST = 40
+ALLOWED_ROLES = {"user", "assistant"}
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -68,11 +75,18 @@ Climbing, guitar, esports, artificial intelligence, cooking.
 
 class ChatMessage(BaseModel):
     role: str
-    content: str
+    content: str = Field(..., min_length=1, max_length=MAX_MESSAGE_CHARS)
+
+    @field_validator("role")
+    @classmethod
+    def role_must_be_allowed(cls, v: str) -> str:
+        if v not in ALLOWED_ROLES:
+            raise ValueError(f"role must be one of {sorted(ALLOWED_ROLES)}")
+        return v
 
 
 class ChatRequest(BaseModel):
-    messages: list[ChatMessage]
+    messages: list[ChatMessage] = Field(..., min_length=1, max_length=MAX_MESSAGES_PER_REQUEST)
 
 
 def _extract_text(content) -> str:
@@ -98,14 +112,15 @@ def _extract_text(content) -> str:
 
 
 @router.post("/chat")
-async def chat(request: ChatRequest):
+@limiter.limit("10/minute;100/hour")
+async def chat(request: Request, payload: ChatRequest):
     print(f"[CHAT] API key set: {bool(OPENAI_API_KEY)} (length: {len(OPENAI_API_KEY)})")
 
     if not OPENAI_API_KEY:
         raise HTTPException(status_code=503, detail="Chat is not configured.")
 
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-    for msg in request.messages[-10:]:
+    for msg in payload.messages[-10:]:
         messages.append({"role": msg.role, "content": msg.content})
 
     print(f"[CHAT] Sending {len(messages)} messages to {OPENAI_MODEL}...")
@@ -137,7 +152,7 @@ async def chat(request: ChatRequest):
                 **{
                     **request_params,
                     "max_completion_tokens": retry_tokens,
-                    "reasoning_effort": "minimal",
+                    "reasoning_effort": "none",
                 }
             )
             retry_choice = retry_response.choices[0]
