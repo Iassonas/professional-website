@@ -316,14 +316,43 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  .intro { padding: 5rem 0 3rem; }
   .introGrid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  .photoWrap { position: static; max-width: 360px; }
+  .photoWrap {
+    position: static;
+    max-width: 360px;
+    margin: 0 auto;
+    order: -1;
+  }
   .timelineItem { grid-template-columns: 1fr; gap: 0.5rem; }
   .skillGrid { grid-template-columns: 1fr; }
   .languageRow { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .intro { padding: 4rem 0 2.5rem; }
+  .title { font-size: clamp(2.2rem, 11vw, 3rem); }
+  .tagline { font-size: 1.1rem; }
+  .bio { font-size: 1rem; }
+  .ctas { gap: 0.6rem; }
+  .ctas .btn { flex: 1 1 auto; justify-content: center; }
+
+  .photoWrap { max-width: 280px; }
+
+  .sectionHeading { font-size: clamp(1.7rem, 8vw, 2.4rem); margin-bottom: 2rem; }
+  .timelineItem { padding: 1.25rem 0; }
+  .timelineYear { font-size: 0.82rem; }
+  .timelineBody h3 { font-size: 1.25rem; }
+  .timelineBullets li { font-size: 0.94rem; }
+
+  .skillCard { padding: 1.4rem 1.1rem; }
+  .skillCard h3 { font-size: 1.1rem; }
+
+  .pubCard { padding: 1.5rem 1.25rem; }
+  .pubTitle { font-size: 1.05rem; }
 }
 
 @media (max-width: 480px) {

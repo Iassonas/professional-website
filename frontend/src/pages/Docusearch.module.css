@@ -283,13 +283,38 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  .hero { padding: 5rem 0 3rem; }
   .heroMeta { grid-template-columns: repeat(2, 1fr); }
-  .steps { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; gap: 1.5rem; }
   .featureGrid { grid-template-columns: repeat(2, 1fr); }
   .useCaseGrid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px) {
-  .heroMeta { grid-template-columns: 1fr; }
+  .hero { padding: 4rem 0 2.5rem; }
+  .lede { font-size: 1.05rem; }
+  .heroCtas { gap: 0.6rem; margin-bottom: 2.5rem; }
+  .heroCtas .btn { flex: 1 1 auto; justify-content: center; }
+
+  .heroMeta { grid-template-columns: 1fr; gap: 1rem; padding-top: 1.5rem; }
+  .metaValue { font-size: 1rem; }
+
+  .sectionHeading { font-size: clamp(1.7rem, 8vw, 2.4rem); margin-bottom: 2rem; }
+  .steps h3 { font-size: 1.35rem; }
+  .steps p { font-size: 0.95rem; }
+
   .featureGrid { grid-template-columns: 1fr; }
+  .featureCard { padding: 1.5rem 1.25rem; }
+  .featureCard h3 { font-size: 1.15rem; }
+
+  .useCaseCard { padding: 1.5rem 1.25rem; }
+  .useCaseCard h3 { font-size: 1.2rem; }
+
+  .faqItem summary { font-size: 1.05rem; padding: 1.25rem 0; }
+  .faqItem p { font-size: 0.95rem; }
+
+  .ctaHeading { font-size: clamp(1.7rem, 8vw, 2.4rem); line-height: 1.15; }
+  .ctaBody { font-size: 1rem; }
+  .ctaButtons { gap: 0.6rem; }
+  .ctaButtons .btn { flex: 1 1 auto; justify-content: center; }
 }

@@ -591,7 +591,7 @@
    RESPONSIVE
    ────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .hero { padding: 4rem 0 3rem; }
+  .hero { padding: 5rem 0 3rem; }
   .heroBottom {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -602,23 +602,56 @@
   .mockBrowser { transform: none; }
 
   .workLink {
-    grid-template-columns: 40px 1fr;
-    gap: 1rem;
+    grid-template-columns: 36px 1fr;
+    gap: 0.75rem;
   }
   .workMeta {
     grid-column: 2;
+    align-items: flex-start;
     text-align: left;
+    margin-top: 0.5rem;
   }
-  .workArrow { position: static; display: inline-block; margin-left: 0.5rem; }
+  .workArrow { margin-top: 0.5rem; }
 
   .skillsGrid { grid-template-columns: 1fr; gap: 2.5rem; }
   .skillsCols { grid-template-columns: 1fr; }
 
-  .marqueeInner { font-size: 1.2rem; }
+  .marqueeInner { font-size: 1.1rem; gap: 1rem; padding-right: 1rem; }
 }
 
 @media (max-width: 520px) {
-  .workName { font-size: 1.5rem; }
-  .mockBody { grid-template-columns: 1fr; }
+  .hero { padding: 4rem 0 2rem; }
+  .heading { margin-bottom: 2rem; }
+  .lede { font-size: 1.05rem; }
+  .heroCtas { gap: 0.6rem; }
+  .heroCtas .btn { flex: 1 1 auto; justify-content: center; }
+  .heroMarquee { margin-top: 2.5rem; padding: 0.85rem 0; }
+  .marqueeInner { font-size: 1rem; }
+
+  .featured { padding: 3rem 0; }
+  .featuredHeading { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .featuredTagline { font-size: 1.1rem; }
+  .featuredBody, .featuredList { font-size: 0.95rem; }
+  .featuredCtas { gap: 0.75rem; }
+  .featuredCtas .btn { flex: 1 1 auto; justify-content: center; }
+
+  .mockBody { grid-template-columns: 1fr; min-height: auto; }
   .mockSidebar { display: none; }
+  .mockChat { padding: 0.85rem; gap: 0.5rem; font-size: 0.8rem; }
+  .mockUrl { font-size: 0.7rem; padding: 0.25rem 0.5rem; }
+
+  .workHeader { margin-bottom: 2rem; }
+  .workLink { padding: 1.5rem 0.5rem; margin: 0 -0.5rem; }
+  .workName { font-size: 1.4rem; gap: 0.5rem; }
+  .workBlurb { font-size: 0.94rem; }
+  .workNo { font-size: 0.85rem; padding-top: 0.45rem; }
+
+  .skillsCols { gap: 1rem; }
+  .skillCard { padding: 1.2rem 1rem; }
+
+  .ctaHeading { font-size: clamp(1.7rem, 7vw, 2.4rem); line-height: 1.15; }
+  .ctaBody { font-size: 1rem; }
+  .ctaButtons { gap: 0.6rem; }
+  .ctaButtons .btn { flex: 1 1 auto; justify-content: center; }
+  .ctaButtons .btn-ghost { flex: 1 1 100%; padding: 0.6rem; }
 }
