@@ -216,7 +216,7 @@ async def chat_stream(request: Request, payload: ChatRequest):
             yield "data: [DONE]\n\n"
         except Exception as e:
             print(f"[CHAT STREAM ERROR] {type(e).__name__}: {e}")
-            yield f"data: {json.dumps({'error': type(e).__name__})}\n\n"
+            yield f"data: {json.dumps({'error': type(e).__name__, 'message': str(e)[:200]})}\n\n"
             yield "data: [DONE]\n\n"
 
     return StreamingResponse(
