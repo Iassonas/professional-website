@@ -162,6 +162,13 @@ function About() {
               <div className={styles.ctas}>
                 <Link to="/contact" className="btn btn-primary btn-arrow">Get in touch</Link>
                 <a
+                  href="/Iassonas_Georgakopoulos_Resume.docx"
+                  download
+                  className="btn btn-outline"
+                >
+                  Download CV ↓
+                </a>
+                <a
                   href="https://docusearch.eu"
                   target="_blank"
                   rel="noopener noreferrer"
