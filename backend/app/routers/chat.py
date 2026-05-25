@@ -1,5 +1,8 @@
+import json
+
 from openai import OpenAI
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field, field_validator
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -175,3 +178,49 @@ async def chat(request: Request, payload: ChatRequest):
         raise HTTPException(status_code=500, detail="Chat unavailable. Please try again later.")
 
     return {"reply": reply}
+
+
+@router.post("/chat/stream")
+@limiter.limit("10/minute;100/hour")
+async def chat_stream(request: Request, payload: ChatRequest):
+    if not OPENAI_API_KEY:
+        raise HTTPException(status_code=503, detail="Chat is not configured.")
+
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    for msg in payload.messages[-10:]:
+        messages.append({"role": msg.role, "content": msg.content})
+
+    def event_stream():
+        try:
+            stream = client.chat.completions.create(
+                model=OPENAI_MODEL,
+                messages=messages,
+                reasoning_effort=OPENAI_REASONING_EFFORT,
+                verbosity=OPENAI_VERBOSITY,
+                max_completion_tokens=OPENAI_MAX_COMPLETION_TOKENS,
+                stream=True,
+            )
+
+            emitted_text = False
+            for chunk in stream:
+                if not chunk.choices:
+                    continue
+                delta = chunk.choices[0].delta
+                content = getattr(delta, "content", None)
+                if content:
+                    emitted_text = True
+                    yield f"data: {json.dumps({'delta': content})}\n\n"
+
+            if not emitted_text:
+                yield f"data: {json.dumps({'error': 'empty'})}\n\n"
+            yield "data: [DONE]\n\n"
+        except Exception as e:
+            print(f"[CHAT STREAM ERROR] {type(e).__name__}: {e}")
+            yield f"data: {json.dumps({'error': type(e).__name__})}\n\n"
+            yield "data: [DONE]\n\n"
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
