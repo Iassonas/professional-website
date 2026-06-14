@@ -182,7 +182,7 @@ function About() {
             <div className={styles.photoWrap}>
               <div className={styles.photoFrame}>
                 <img
-                  src="/profile.jpg"
+                  src="/iasso_pict2.jpg"
                   alt="Iassonas Georgakopoulos"
                   onError={(e) => { e.currentTarget.style.display = 'none' }}
                 />
